@@ -43,6 +43,8 @@ total = 0.0
 while main_type != "Q":
     if main_type in main.keys():
         #check user input and put entire dictionary main inside calc_main_cost function
+        #so if user input is valid from above if statement then put user input and main dictionary inside
+        # the calc_main_cost function
         calc_main_cost(main_type, main)
         side_order = get_side_order()
         while side_order != "Q":
