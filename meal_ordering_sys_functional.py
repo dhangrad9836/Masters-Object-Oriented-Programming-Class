@@ -13,7 +13,7 @@ def calc_main_cost(m_type, m_dict):
             total += v
 
 def get_side_order():
-    side_order = input("Choose a side order by typing its name OR enter Q to quit: ")
+    side_order = input("Choose a side order by typing its number OR enter Q to quit: ")
     return side_order
 
 # this function calculates the side order cost by increasing the value of total by the value of the side order entry with
@@ -21,16 +21,15 @@ def get_side_order():
 def add_side_order(s_type, s_dict):
     # declare variable total as global to modify it in the function
     global total
-    for k, v in s_dict.items():
-        if k == s_type:
-            total += v
+    total += list(s_dict.values()[int(s_type)])
 
 def add_item(food_type, food_list):
     # declare variable total as global to modify it in the function
     global total
-    for k, v in food_list.items():
-        if k == food_type:
-            total += v
+    # first we are turning the food_list dictonary key/values....only the values to a list with list(food_list.values())
+    # then the second part we are turning the user entered [int(food_type)] to an index value
+    # so basically we are just finding the index of the list of the dictionary values which we converted to a list of prices
+    total += list(food_list.values())[int(food_type)]
 
 
 ###############################################################################################
@@ -43,26 +42,29 @@ main = {"Burger": 10.55, "Club Sandwich": 8.45, "Rump Steak" : 15.40, "Ceasar Sa
 side = {"Loaded Chips": 3.65, "Seasonal Salad": 3.15, "Onion Rings": 3.45, "Garlic Bread": 2.50, "Cheese Platter": 4.95}
 
 # ask for user input with main_type is for the main dish
-main_type = input("Choose a main by typing its name OR enter Q to quit: ")
+# main_type = input("Choose a main by typing its name OR enter Q to quit: ")
+main_type = input("Choose a main by typing its number OR enter Q to quit: ")
 total = 0.0
 
-#main loop of the program
+# main loop of the program
 while main_type != "Q":
-    if main_type in main.keys():
-        #check user input and put entire dictionary main inside calc_main_cost function
-        #so if user input is valid from above if statement then put user input and main dictionary inside
+    # if main_type in main.keys():
+    # check if the number entered is within the range of the length of the dictionary
+    if int(main_type) < len(main):
+        # check user input and put entire dictionary main inside calc_main_cost function
+        # so if user input is valid from above if statement then put user input and main dictionary inside
         # the calc_main_cost function
         add_item(main_type, main)
         side_order = get_side_order()
         while side_order != "Q":
-            if side_order in side.keys():
+            if int(side_order) < len(side):
                 add_item(side_order, side)
             else:
                 print("invalid input")
             side_order = get_side_order()
     else:
         print("invalid input")
-    main_type = input("Choose a main by typing its name OR enter Q to quit: ")
+    main_type = input("Choose a main by typing its number OR enter Q to quit: ")
 
 print("Total cost of your order: {:.2f}".format(total))
 
