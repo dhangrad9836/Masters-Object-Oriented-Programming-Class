@@ -26,9 +26,9 @@ def add_side_order(s_type, s_dict):
 def add_item(food_type, food_list):
     # declare variable total as global to modify it in the function
     global total
-    # first we are turning the food_list dictonary key/values....only the values to a list with list(food_list.values())
+    # first we are turning the food_list dictionary key/values....only the values to a list with list(food_list.values())
     # then the second part we are turning the user entered [int(food_type)] to an index value
-    # so basically we are just finding the index of the list of the dictionary values which we converted to a list of prices
+    # so basically we are just finding the index of the list of the dictionary values which we converted to a list of prices...ie: food_list_values[index]
     total += list(food_list.values())[int(food_type)]
 
 
@@ -54,11 +54,11 @@ while main_type != "Q":
         # check user input and put entire dictionary main inside calc_main_cost function
         # so if user input is valid from above if statement then put user input and main dictionary inside
         # the calc_main_cost function
-        add_item(main_type, main)
+        add_item(main_type, main)           ##we are using the new function add_item
         side_order = get_side_order()
         while side_order != "Q":
             if int(side_order) < len(side):
-                add_item(side_order, side)
+                add_item(side_order, side)      ##we are using the new function add_item
             else:
                 print("invalid input")
             side_order = get_side_order()
